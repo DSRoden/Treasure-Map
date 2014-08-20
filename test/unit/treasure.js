@@ -24,8 +24,9 @@ describe('Treasure', function(){
 
   describe('constructor', function(){
     it('should create a new treasure object', function(){
-       var t = {name: 'silver', loc:{ lat:-43.7127837, lng: -77.00594130000002, name: 'new york 4'}, difficulty: '1', order: '3', hints:{1:'a', 2:'b', 3:'c'}, tags: 'tag1, tag2', isFound: false},
+       var t = {name: ['silver'], loc:['new york 4','0','0'], difficulty: ['1'], order: ['3'], hints:['a', 'b', 'c'], tags: ['tag1, tag2']},
        treasure = new Treasure(t);
+      console.log(t);
       expect(treasure).to.be.instanceof(Treasure);
       expect(treasure.name).to.equal('silver');
       expect(treasure.loc.name).to.equal('new york 4');
@@ -39,14 +40,14 @@ describe('Treasure', function(){
 
   describe('#save', function(){
     it('should save an object to treasures', function(done){
-       var t = {name: 'silver', loc:{ lat:-43.7127837, lng: -77.00594130000002, name: 'new york 4'}, difficulty: '1', order: '3', hints:{1:'a', 2:'b', 3:'c'}, tags: 'tag1, tag2', isFound: false},
+       var t = {name: ['silver'], loc:['new york 4', '0', '0'], difficulty: ['1'], order: ['3'], hints:['a', 'b', 'c'], tags: ['tag1, tag2']},
        treasure = new Treasure(t);
        treasure.save(function(){
         Treasure.query({},{},function(err, treasures){
           expect(treasures).to.have.length(4);
           done();
         });
-      })
+      });
     });
   });
 
@@ -78,5 +79,12 @@ describe('Treasure', function(){
       });
     });
   });
+
+  //describe('.create', function(){
+    //it('should create a new treasure', function(done){
+      //Treasure.create({name: ['silver'], loc:['new york 4', '0', '0'], difficulty: ['1'], order: ['3'], hints:['a', 'b', 'c'], tags: ['tag1, tag2']})
+      //;
+    //});
+  //});
 });
 
