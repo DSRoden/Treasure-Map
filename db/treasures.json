@@ -1,0 +1,37 @@
+{
+  "_id":{"$oid":"000000000000000000000001"},
+  "name":"gold",
+  "loc": {lat:40.7127837, lng:-74.00594130000002, name:'new york 1'},
+  "difficulty": 1,
+  "order": 1,
+  "hints":["a","b","c"],
+  "photos":["http://i.telegraph.co.uk/multimedia/archive/02705/newyork_2705424b.jpg","http://www.guardnow.com/wp-content/uploads/2012/01/Security-Guard-New-York.jpg"],
+  "tags": ["tag1", "tag2"],
+  "isFound": false
+}
+
+{
+  "_id":{"$oid":"000000000000000000000002"},
+  "name":"diamonds",
+  "loc": {lat:41.7127837, lng:-75.00594130000002, name:'new york 2'},
+  "difficulty": 2,
+  "order": 2,
+  "hints":["a","b","c"],
+  "photos":["http://i.telegraph.co.uk/multimedia/archive/02705/newyork_2705424b.jpg","http://www.guardnow.com/wp-content/uploads/2012/01/Security-Guard-New-York.jpg"],
+  "tags": ["tag1", "tag2"],
+  "isFound": false
+}
+
+{
+  "_id":{"$oid":"000000000000000000000003"},
+  "name":"gold",
+  "loc": {lat:42.7127837, lng:-76.00594130000002, name:'new york 3'},
+  "difficulty": 3,
+  "order": 3,
+  "hints":["a","b","c"],
+  "photos":["http://i.telegraph.co.uk/multimedia/archive/02705/newyork_2705424b.jpg","http://www.guardnow.com/wp-content/uploads/2012/01/Security-Guard-New-York.jpg"],
+  "tags": ["tag1", "tag4"],
+  "isFound": false
+}
+
+
