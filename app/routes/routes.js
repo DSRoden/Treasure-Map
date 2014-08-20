@@ -17,6 +17,7 @@ module.exports = function(app, express){
   app.get('/', home.index);
   app.get('/treasures', treasures.index);
   app.get('/treasures/new', treasures.init);
+  app.post('/treasures/new', treasures.create);
 
   console.log('Express: Routes Loaded');
 };

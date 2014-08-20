@@ -1,6 +1,39 @@
 extends ../shared/template
 block content
-  h2 Treasure
+  .row
+      form(role='form', method='post', action='/treasures/new', enctype='multipart/form-data')
+        .col-xs-6
+          .form-group
+            label(for='name') Treasure Name
+            input.form-control#name(name='name', type='text', placeholder = 'gold')
+          .form-group
+            label(for='loc') Location
+            input.form-control#loc(name='loc', type='text', placeholder='France')
+            input#lat(type='hidden', name='loc')
+            input#lng(type='hidden', name='loc')
+          .form-group
+            label(for='difficulty') Difficulty
+            select#difficulty(name='difficulty')
+              option(value=1) Easy
+              option(value=2) Medium
+              option(value=3) Hard
+          .form-group 
+            label(for='order') Order
+            input#order(name='order', type='text', placeholder = '1')
+        .col-xs-6
+           .form-group#hints
+             label(for='hints') Hints
+             input.form-control(name='hints', type='text')
+             button.btn.btn-success#addHint(type='button') Add Hint
+           .form-group
+             label(for='photos') Photos
+             input.form-control#upload(name='photos', type='file', multiple=true)
+           .form-group
+             label(for='tags') Tags
+             input.form-control#tags(name='tags', type='text')
+             button.btn.btn-success#submit(type='submit') Submit
+
+
 
 block scripts
-  script(src='/js/user/treasures.js')
+  script(src='/js/user/new-treasure.js')
