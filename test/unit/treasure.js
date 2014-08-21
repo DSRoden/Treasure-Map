@@ -24,8 +24,8 @@ describe('Treasure', function(){
 
   describe('constructor', function(){
     it('should create a new treasure object', function(){
-       var t = {name: ['silver'], loc:['new york 4','0','0'], difficulty: ['1'], order: ['3'], hints:['a', 'b', 'c'], tags: ['tag1, tag2']},
-       treasure = new Treasure(t);
+      var t = {name: ['silver'], loc:['new york 4','0','0'], difficulty: ['1'], order: ['3'], hints:['a', 'b', 'c'], tags: ['tag1, tag2']},
+      treasure = new Treasure(t);
       console.log(t);
       expect(treasure).to.be.instanceof(Treasure);
       expect(treasure.name).to.equal('silver');
@@ -40,9 +40,9 @@ describe('Treasure', function(){
 
   describe('#save', function(){
     it('should save an object to treasures', function(done){
-       var t = {name: ['silver'], loc:['new york 4', '0', '0'], difficulty: ['1'], order: ['3'], hints:['a', 'b', 'c'], tags: ['tag1, tag2']},
-       treasure = new Treasure(t);
-       treasure.save(function(){
+      var t = {name: ['silver'], loc:['new york 4', '0', '0'], difficulty: ['1'], order: ['3'], hints:['a', 'b', 'c'], tags: ['tag1, tag2']},
+      treasure = new Treasure(t);
+      treasure.save(function(){
         Treasure.query({},{},function(err, treasures){
           expect(treasures).to.have.length(4);
           done();

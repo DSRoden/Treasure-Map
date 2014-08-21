@@ -14,6 +14,7 @@ function Treasure(o){
   this.photos          = [];
   this.tags            = o.tags[0].split(',').map(function(tag){return tag.trim();});
   this.isFound         = false;
+  this.isLinkable      = this.order === 1 ? true : false;
 
 }
 
@@ -32,20 +33,33 @@ Treasure.create = function(fields, files, cb){
   });
 };
 
-Treasure.query = function(query, sort, cb){
-  Treasure.collection.find(query, sort).toArray(cb);
+Treasure.query = function(query, cb){
+  var filter = {},
+      sort   = {};
+  if(query.tag){filter = {tags:{$in:[query.tag]}};}
+  if(query.sort){sort[query.sort] = query.order * 1;}
+
+  Treasure.collection.find(filter).sort(sort).toArray(cb);
+};
+
+Treasure.count = function(cb){
+  Treasure.collection.count(cb);
 };
 
 Treasure.findById = function(id, cb){
   var _id = Mongo.ObjectID(id);
   Treasure.collection.findOne({_id:_id}, function(err, t){
-    cb(err, t);
+    cb(t);
   });
 };
 
 Treasure.found = function(id, cb){
   var _id = Mongo.ObjectID(id);
-  Treasure.collection.update({_id:_id}, {$set: {isFound: true}}, cb);
+  Treasure.collection.update({_id:_id}, {$set: {isFound: true}}, function(){
+    Treasure.findById(_id.toString(), function(treasure){
+      Treasure.collection.update({order:treasure.order + 1}, {$set: {isLinkable: true}}, cb);
+    });
+  });
 };
 
 Treasure.prototype.uploadPhotos = function(files, cb){
@@ -63,7 +77,7 @@ Treasure.prototype.uploadPhotos = function(files, cb){
     fs.renameSync(photo.path, abs);
 
     self.photos.push(rel);
-    });
+  });
 
   Treasure.collection.save(self, cb);
 };

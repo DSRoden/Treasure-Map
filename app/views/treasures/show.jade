@@ -1,6 +1,25 @@
 extends ../shared/template
 block content
-  h2 Treasure
+  .row
+    .col-xs-12
+      #map
+  .row
+    .col-xs-6
+      .page-header: h1= treasure.name
+    .col-xs-6
+      .photos
+        each photo in treasure.photos
+          img.img-thumbnail(src=photo)
+  .row#showData(data-name='#{treasure.loc.name}', data-lat='#{treasure.loc.lat}', data-lng='#{treasure.loc.lng}', data-order='#{treasure.order}')
+  .row
+    .col-xs-6
+      .hints
+        ul
+          each hint in treasure.hints
+            li=hint
+  .row
+    if treasure.isFound ===  false
+      a.btn.btn-success#foundIt(href='/treasures/#{treasure._id}/found') Found It
 
 block scripts
   script(src='/js/user/show.js')

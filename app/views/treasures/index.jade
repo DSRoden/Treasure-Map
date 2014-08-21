@@ -1,6 +1,37 @@
 extends ../shared/template
 block content
-  h2 Treasure
+  .row
+    .col-xs-12
+      #map
+  .row
+    .col-xs-12
+      table.table.table-hover
+        thead
+          tr
+            th!= linkBuilder.sort(query, 'name', 'Name')
+            th!= linkBuilder.sort(query, 'loc.name', 'Location')
+            th!= linkBuilder.sort(query, 'difficulty', 'Difficulty')
+            th Tags 
+            th!= linkBuilder.sort(query, 'order', 'Order')
+            th!= linkBuilder.sort(query, 'isFound', 'Found')
+        tbody
+          each treasure in treasures
+            tr(data-name='#{treasure.loc.name}', data-lat='#{treasure.loc.lat}', data-lng='#{treasure.loc.lng}', data-order='#{treasure.order}')
+              if treasure.isLinkable == true && treasure.isFound === true
+                td: a(href='/treasures/#{treasure._id}')
+                      img(src='http://us.cdn3.123rf.com/168nwm/longquattro/longquattro1009/longquattro100900004/7919089-golden-key-on-white-background.jpg')
+              else if treasure.isLinkable == true
+                td: a(href='/treasures/#{treasure._id}')= treasure.name
+              else
+                td= treasure.name
+              td= treasure.loc.name
+              td= treasure.difficulty
+              td!= linkBuilder.tags(query, treasure.tags)
+              td= treasure.order
+              if treasure.isFound === true
+                td.foundImage(style='background-image: url("http://www.iconsdb.com/icons/preview/moth-green/check-mark-8-xxl.png");')
+              else
+                td.foundImage(style='background-image: url("http://img3.wikia.nocookie.net/__cb20130403220653/sqmegapolis/images/3/30/X-mark-3-256.png");')
 
 block scripts
   script(src='/js/user/treasures.js')

@@ -13,10 +13,6 @@
     $('#hints').append($input);
   }
 
-  function send(){
-    alert('alert');
-  }
-
   function addTreasure(e){
     var lat = $('#lat').val();
     if(!lat){
@@ -33,12 +29,11 @@
           lat = results[0].geometry.location.lat(),
           lng = results[0].geometry.location.lng();
 
-     $('#loc').val(name);
-     $('#lat').val(lat);
-     $('#lng').val(lng);
-     $('form').submit();
-
-   });
+      $('#loc').val(name);
+      $('#lat').val(lat);
+      $('#lng').val(lng);
+      $('form').submit();
+    });
   }
 
 })();
